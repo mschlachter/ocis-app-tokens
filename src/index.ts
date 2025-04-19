@@ -28,7 +28,7 @@ export default defineWebApplication({
       {
         path: '/tokens',
         name: 'tokens',
-        component: () => import('./views/Tokens.vue'),
+        component: () => import('./views/AppTokens.vue'),
         meta: {
           authContext: 'user',
           title: $gettext('App Tokens')
