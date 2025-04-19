@@ -29,21 +29,10 @@ Currently local development requires docker and is only supported on Linux and m
    ```
 1. Open your browser and navigate to `https://host.docker.internal:9200` to see your oCIS dev environment. The default user is `admin` with password `admin`. Your app from this directory is automatically loaded.
 
-### Develop Your App
-You can start developing your app by modifying the files in the `src` folder. The development server will automatically reload your changes as long as you keep a running process of `pnpm build:w`. In this setup you currently need a page reload to see your changes.
-
-You should start by rephrasing the app name `skeleton` to your desired app name in the following files:
-- package.json
-- vite.config.ts
-- dev/docker/ocis/apps.yaml (if you need config for your app)
-- src/index.ts
-- tests/unit/App.spec.ts
-
-Don't forget to rename the root directory as well.
+### Developing The App
+You can work on the app by modifying the files in the `src` folder. The development server will automatically reload your changes as long as you keep a running process of `pnpm build:w`. In this setup you currently need a page reload to see your changes.
 
 More details and examples about app/extension development are available in the [developer documentation](https://owncloud.dev/clients/web/extension-system/).
-
-Once you have a working extension, consider making it available via git.
 
 ### Testing
 This repo holds the basic setup for unit testing with [vitest](https://vitest.dev/guide/). You can run the tests with:

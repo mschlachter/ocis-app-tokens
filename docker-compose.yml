@@ -27,7 +27,7 @@ services:
     volumes:
       - ocis-config:/etc/ocis
       - ./dev/docker/ocis/apps.yaml:/etc/ocis/apps.yaml
-      - ./dist:/web/apps/skeleton
+      - ./dist:/web/apps/ocis-app-tokens
     depends_on:
       - traefik
 

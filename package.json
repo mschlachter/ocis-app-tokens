@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "ownCloud",
   "private": true,
-  "homepage": "https://github.com/owncloud/web-app-skeleton",
+  "homepage": "https://github.com/mschlachter/ocis-app-tokens",
   "type": "module",
   "scripts": {
     "build": "pnpm vite build",
