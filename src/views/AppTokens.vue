@@ -39,7 +39,7 @@
         </oc-grid>
         <oc-button variation="primary" class="oc-mb" @click="saveToken"> Create </oc-button>
       </form>
-      <h2 class="oc-heading-divider">Existing tokens</h2>
+      <h2 class="oc-heading-divider">Existing Tokens</h2>
       <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true">
         <template #footer> {{ tokens.length || 0 }} tokens </template>
         <template #created_date="rowData">
@@ -52,6 +52,23 @@
         </template>
         <template #action="rowData">
           <oc-button size="small" variant="danger" @click="deleteToken(rowData)">Delete</oc-button>
+        </template>
+      </oc-table>
+      <h2 class="oc-heading-divider">Webdav Endpoints</h2>
+      <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true">
+        <template #footer> {{ tokens.length || 0 }} endpoints </template>
+        <template #webUrl="rowData">
+          <a :href="rowData.item.webUrl" target="_blank">{{ rowData.item.webUrl }}</a>
+        </template>
+        <template #webDavUrl="rowData">
+          <a :href="rowData.item.root.webDavUrl" target="_blank">{{
+            rowData.item.root.webDavUrl
+          }}</a>
+        </template>
+        <template #action="rowData">
+          <oc-button size="small" variant="danger" @click="copyEndpointUrl(rowData)">
+            Copy Webdav URL
+          </oc-button>
         </template>
       </oc-table>
     </div>
@@ -137,6 +154,42 @@ export default {
           width: 'shrink'
         }
       ],
+      endpoints: [],
+      endpointTableFields: [
+        {
+          name: 'name',
+          title: 'Drive Name',
+          alignH: 'left'
+        },
+        {
+          name: 'driveAlias',
+          title: 'Drive Path',
+          alignH: 'left'
+        },
+        {
+          name: 'driveType',
+          title: 'Type',
+          alignH: 'left'
+        },
+        {
+          name: 'webUrl',
+          title: 'Web URL',
+          alignH: 'left',
+          type: 'slot'
+        },
+        {
+          name: 'webDavUrl',
+          title: 'Webdav URL',
+          alignH: 'left',
+          type: 'slot'
+        },
+        {
+          name: 'action',
+          title: '',
+          type: 'slot',
+          width: 'shrink'
+        }
+      ],
       create_token_label: null,
       create_token_expiry: 72,
       create_token_expiry_units: 'Hours',
@@ -158,6 +211,7 @@ export default {
   },
   created: function () {
     this.getTokens()
+    this.getEndpoints()
   },
   methods: {
     getTokens() {
@@ -187,6 +241,37 @@ export default {
           this.tokens = tokenData
         })
       })
+    },
+    getEndpoints: function () {
+      const authStore = useAuthStore()
+      const auth = new Auth({
+        accessToken: authStore.accessToken,
+        publicLinkToken: authStore.publicLinkToken,
+        publicLinkPassword: authStore.publicLinkPassword
+      })
+
+      fetch('/graph/v1.0/me/drives', {
+        headers: auth.getHeaders()
+      }).then((apiResponse) => {
+        apiResponse.json().then((endpointData) => {
+          // Create consistent sort
+          endpointData.value.sort((a, b) => {
+            if (a.driveAlias < b.driveAlias) {
+              return -1
+            }
+            if (a.driveAlias > b.driveAlias) {
+              return 1
+            }
+            return 0
+          })
+
+          this.endpoints = endpointData.value
+        })
+      })
+    },
+    copyEndpointUrl: function (rowData) {
+      navigator.clipboard.writeText(rowData.item.root.webDavUrl)
+      this.showNotification('Webdav URL copied to clipboard', 'success')
     },
     saveToken() {
       // Basic validation
