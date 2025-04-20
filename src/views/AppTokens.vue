@@ -23,7 +23,7 @@
         <oc-text-input
           v-model="create_token_expiry"
           label="Expires"
-          description-message="Enter a timespan ending with 'h', 'm', or 's', such as '72h'."
+          description-message="Enter a duration as an number followed by either 'h', 'm', or 's', such as '72h'."
           default-value="72h"
           :error-message="create_token_error"
           class="oc-mb"
@@ -73,6 +73,17 @@
     @confirm="confirmDelete"
     @cancel="closeDialog"
   />
+  <oc-notifications position="top-right">
+    <oc-notification-message
+      v-for="item in notifications"
+      :key="item.title"
+      :status="item.status"
+      :title="item.title"
+      :message="item.message"
+      :timeout="item.timeout"
+      @close="removeNotification(item)"
+    />
+  </oc-notifications>
 </template>
 
 <script lang="ts">
@@ -123,7 +134,8 @@ export default {
       showCreatedModal: false,
       createdToken: null,
       showDeleteModal: false,
-      tokenToDelete: null
+      tokenToDelete: null,
+      notifications: []
     }
   },
   created: function () {
@@ -150,7 +162,9 @@ export default {
           })
 
           // Create consistent sort
-          tokenData.sort((a, b) => new Date(b.created_date) - new Date(a.created_date))
+          tokenData.sort(
+            (a, b) => new Date(b.created_date).getTime() - new Date(a.created_date).getTime()
+          )
 
           this.tokens = tokenData
         })
@@ -175,27 +189,37 @@ export default {
         headers: auth.getHeaders()
       })
         .then((apiResponse) => {
-          apiResponse.json().then((tokenData) => {
-            this.createdToken = tokenData
-            this.create_token_error = null
-            this.showCreatedModal = true
-            this.getTokens()
-          })
+          if (apiResponse.ok) {
+            apiResponse
+              .json()
+              .then((tokenData) => {
+                this.createdToken = tokenData
+                this.create_token_error = null
+                this.showCreatedModal = true
+                this.getTokens()
+              })
+              .catch((error) => {
+                this.showNotification('Unexpected response from Auth App Service', 'danger')
+                console.error(error)
+              })
+          } else {
+            apiResponse.text().then((errorMessage) => (this.create_token_error = errorMessage))
+          }
         })
         .catch((error) => {
-          this.create_token_error = error
+          this.showNotification('Error connecting to Auth App Service', 'danger')
+          console.error(error)
         })
     },
     copyNewToken() {
       navigator.clipboard.writeText(this.createdToken.token)
-
-      this.closeDialog()
+      this.showNotification('Token copied to clipboard', 'success')
     },
     deleteToken(rowData) {
       this.tokenToDelete = rowData.item.token
       this.showDeleteModal = true
     },
-    confirmDelete(rowData) {
+    confirmDelete() {
       const urlParams = new URLSearchParams()
       urlParams.append('token', this.tokenToDelete)
 
@@ -209,14 +233,31 @@ export default {
       fetch(`/auth-app/tokens?${urlParams}`, {
         method: 'DELETE',
         headers: auth.getHeaders()
-      }).finally(() => {
-        this.getTokens()
-        this.closeDialog()
       })
+        .then(() => {
+          this.showNotification('Token deleted', 'success')
+        })
+        .catch((error) => {
+          this.showNotification('Error while deleting token', 'warning')
+          console.log(error)
+        })
+        .finally(() => {
+          this.getTokens()
+          this.closeDialog()
+        })
     },
-    closeDialog(rowData) {
+    closeDialog() {
       this.showCreatedModal = false
       this.showDeleteModal = false
+    },
+    showNotification(title, status = 'passive') {
+      this.notifications.push({
+        title: title,
+        status: status
+      })
+    },
+    removeNotification(item) {
+      this.notifications = this.notifications.filter((el) => el !== item)
     }
   }
 }
