@@ -2,7 +2,7 @@
   <!-- documentation for components: https://owncloud.design/#/oC%20Components -->
   <main class="oc-mt-m oc-mb-l oc-flex oc-flex-center app-content oc-width-1-1">
     <div class="tokens-page">
-      <h1>App Tokens</h1>
+      <h1 class="oc-heading-divider">App Tokens</h1>
       <p>
         Please ensure the
         <a
@@ -12,7 +12,7 @@
         >
         is enabled and configured before using this plugin.
       </p>
-      <h2>Create Token</h2>
+      <h2 class="oc-heading-divider">Create Token</h2>
       <form id="create-token-form">
         <!-- Custom labels don't seem to be supported by API yet -->
         <oc-text-input
@@ -20,17 +20,26 @@
           label="Label (Optional)"
           class="oc-mb oc-hidden"
         />
-        <oc-text-input
-          v-model="create_token_expiry"
-          label="Expires"
-          description-message="Enter a duration as an number followed by either 'h', 'm', or 's', such as '72h'."
-          default-value="72h"
-          :error-message="create_token_error"
-          class="oc-mb"
-        />
+        <oc-grid flex class="oc-mb">
+          <oc-text-input
+            v-model="create_token_expiry"
+            label="Expires in"
+            type="number"
+            :error-message="create_token_error"
+            style="width: 8em"
+          />
+          <oc-select
+            label="Units"
+            v-model="create_token_expiry_units"
+            :options="Object.keys(expiryStringGenerator)"
+            :clearable="false"
+            :searchable="false"
+            style="width: 8em"
+          />
+        </oc-grid>
         <oc-button variation="primary" class="oc-mb" @click="saveToken"> Create </oc-button>
       </form>
-      <h2>Existing tokens</h2>
+      <h2 class="oc-heading-divider">Existing tokens</h2>
       <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true">
         <template #footer> {{ tokens.length || 0 }} tokens </template>
         <template #created_date="rowData">
@@ -129,13 +138,22 @@ export default {
         }
       ],
       create_token_label: null,
-      create_token_expiry: null,
+      create_token_expiry: 72,
+      create_token_expiry_units: 'Hours',
       create_token_error: null,
       showCreatedModal: false,
       createdToken: null,
       showDeleteModal: false,
       tokenToDelete: null,
-      notifications: []
+      notifications: [],
+      expiryStringGenerator: {
+        Minutes: () => this.create_token_expiry + 'm',
+        Hours: () => this.create_token_expiry + 'h',
+        Days: () => this.create_token_expiry * 24 + 'h',
+        Weeks: () => this.create_token_expiry * 24 * 7 + 'h',
+        Months: () => this.create_token_expiry * 24 * 30 + 'h',
+        Years: () => this.create_token_expiry * 24 * 365 + 'h'
+      }
     }
   },
   created: function () {
@@ -171,11 +189,20 @@ export default {
       })
     },
     saveToken() {
+      // Basic validation
+      if (isNaN(this.create_token_expiry) || this.create_token_expiry <= 0) {
+        this.create_token_error = "'Expires in' must be a number greater than 0"
+        return
+      }
+
       const urlParams = new URLSearchParams()
       if (this.create_token_label) {
         urlParams.append('label', this.create_token_label)
       }
-      urlParams.append('expiry', this.create_token_expiry || '72h')
+      const expiryString = this.expiryStringGenerator[this.create_token_expiry_units](
+        this.create_token_expiry
+      )
+      urlParams.append('expiry', expiryString)
 
       const authStore = useAuthStore()
       const auth = new Auth({
@@ -269,10 +296,6 @@ main {
 
   .tokens-page {
     width: 80rem;
-
-    h1 {
-      border-bottom: 1px solid var(--oc-color-border);
-    }
   }
 }
 @media (max-width: 1200px) {
