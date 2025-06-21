@@ -54,7 +54,7 @@
           <oc-button size="small" variant="danger" @click="deleteToken(rowData)">Delete</oc-button>
         </template>
       </oc-table>
-      <h2 class="oc-heading-divider">Webdav Endpoints</h2>
+      <h2 class="oc-heading-divider">WebDAV Endpoints</h2>
       <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true">
         <template #footer> {{ tokens.length || 0 }} endpoints </template>
         <template #webUrl="rowData">
@@ -67,7 +67,7 @@
         </template>
         <template #action="rowData">
           <oc-button size="small" variant="danger" @click="copyEndpointUrl(rowData)">
-            Copy Webdav URL
+            Copy WebDAV URL
           </oc-button>
         </template>
       </oc-table>
@@ -179,7 +179,7 @@ export default {
         },
         {
           name: 'webDavUrl',
-          title: 'Webdav URL',
+          title: 'WebDAV URL',
           alignH: 'left',
           type: 'slot'
         },
@@ -271,7 +271,7 @@ export default {
     },
     copyEndpointUrl: function (rowData) {
       navigator.clipboard.writeText(rowData.item.root.webDavUrl)
-      this.showNotification('Webdav URL copied to clipboard', 'success')
+      this.showNotification('WebDAV URL copied to clipboard', 'success')
     },
     saveToken() {
       // Basic validation
