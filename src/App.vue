@@ -27,6 +27,7 @@
             type="number"
             :error-message="create_token_error"
             style="width: 8em"
+            class="expires-input"
           />
           <oc-select
             v-model="create_token_expiry_units"
@@ -35,9 +36,10 @@
             :clearable="false"
             :searchable="false"
             style="width: 8em"
+            class="expires-unit-dropdown"
           />
         </oc-grid>
-        <oc-button variation="primary" class="oc-mb" @click="saveToken"> Create </oc-button>
+        <oc-button variation="primary" class="oc-mb save-token-btn" @click="saveToken"> Create </oc-button>
       </form>
       <h2 class="oc-heading-divider">Existing Tokens</h2>
       <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true" class="token-table">
@@ -75,6 +77,7 @@
   </main>
   <oc-modal
     v-if="showCreatedModal"
+    class="created-modal"
     variation="success"
     icon="checkbox-circle"
     title="Token created"
@@ -88,6 +91,7 @@
   />
   <oc-modal
     v-if="showDeleteModal"
+    class="delete-confirm-modal"
     variation="danger"
     icon="alert"
     title="Delete token"

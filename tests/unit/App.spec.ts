@@ -1,10 +1,11 @@
 import { expect, test } from 'vitest'
 
-import viewComponent from '../../src/App.vue'
+import App from '../../src/App.vue'
 import { defaultPlugins, mount } from '@ownclouders/web-test-helpers'
 import { mock } from 'vitest-mock-extended'
 import { Resource } from '@ownclouders/web-client'
 import { AppConfigObject } from '@ownclouders/web-pkg'
+import { Mock } from 'node:test'
 
 describe('OCIS App Tokens', () => {
   it('does unit conversions correctly', async () => {
@@ -60,9 +61,40 @@ describe('OCIS App Tokens', () => {
   })
 
   it('can add a token', async () => {
-    // TODO: create this test
-    const wrapper = await createWrapperAndFetchData()
-    expect(true).toBeTruthy()
+    // Set expiry to 3 days, which should be transformed into "72h"
+    const wrapper = await createWrapperAndFetchData(3, "Days")
+    expect(true).toBeTruthy();
+
+    (global.fetch as Mock<Procedure>).mockResolvedValueOnce({
+      ok: true,
+      json: () => {
+        return Promise.resolve(
+          {
+            "token": "5B1oI2H48DMn630s",
+            "expiration_date": "2025-06-25T01:53:25.312230089Z",
+            "created_date": "2025-06-22T01:53:25Z",
+            "label": "Generated via API"
+          }
+        );
+      },
+    });
+
+    (wrapper.find('.save-token-btn').element as HTMLButtonElement).click()
+    await wrapper.vm.$nextTick()
+
+    expect(global.fetch).toHaveBeenLastCalledWith(
+      "/auth-app/tokens?expiry=72h",
+      {
+        "headers": {},
+        "method": "POST",
+      }
+    );
+
+    // Await post-save get call
+    await wrapper.vm.$nextTick();
+
+    // Close success modal
+    wrapper.vm.closeDialog()
   })
 
   it('can delete a token', async () => {
@@ -72,10 +104,10 @@ describe('OCIS App Tokens', () => {
   })
 })
 
-async function createWrapperAndFetchData() {
+async function createWrapperAndFetchData(expiry: number = 72, expiry_units: string = "Hours") {
     setupMockFetch()
     
-    const { wrapper } = createWrapper()
+    const { wrapper } = createWrapper(expiry, expiry_units)
 
     // Need to await both fetch requests
     await wrapper.vm.$nextTick()
@@ -85,12 +117,14 @@ async function createWrapperAndFetchData() {
     return wrapper
 }
 
-function createWrapper() {
+function createWrapper(expiry: number = 72, expiry_units: string = "Hours") {
   return {
-    wrapper: mount(viewComponent, {
+    wrapper: mount(App, {
       props: {
         resource: mock<Resource>(),
-        applicationConfig: mock<AppConfigObject>()
+        applicationConfig: mock<AppConfigObject>(),
+        create_token_expiry: expiry,
+        create_token_expiry_units: expiry_units
       },
       global: {
         plugins: [...defaultPlugins({ piniaOptions: { themeState: { currentTheme: { isDark: false } } } })]
@@ -101,7 +135,7 @@ function createWrapper() {
 
 function setupMockFetch() {
   // Setup mock fetch
-  // Order matches order in viewComponent::created()
+  // Order matches order in App::created()
   global.fetch = vi.fn()
   // Tokens
   .mockResolvedValueOnce({
