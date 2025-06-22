@@ -8,7 +8,7 @@ The following instructions will help you to set up the proper development enviro
 
 To get started, clone the repository and follow the instructions below.
 
-This plugin requires as a prerequisite that the [Auth App Service](https://doc.owncloud.com/ocis/next/deployment/services/s-list/auth-app.html) is enabled and properly configured.
+This plugin requires as a prerequisite that the [Auth App Service](https://doc.owncloud.com/ocis/next/deployment/services/s-list/auth-app.html) is enabled and properly configured. This is done already for the included docker containers, refer to [docker-compose.yml](./docker-compose.yml) for configuration variables.
 
 ### Development Environment
 

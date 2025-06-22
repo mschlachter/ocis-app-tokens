@@ -29,8 +29,8 @@
             style="width: 8em"
           />
           <oc-select
-            label="Units"
             v-model="create_token_expiry_units"
+            label="Units"
             :options="Object.keys(expiryStringGenerator)"
             :clearable="false"
             :searchable="false"
@@ -40,7 +40,7 @@
         <oc-button variation="primary" class="oc-mb" @click="saveToken"> Create </oc-button>
       </form>
       <h2 class="oc-heading-divider">Existing Tokens</h2>
-      <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true">
+      <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true" class="token-table">
         <template #footer> {{ tokens.length || 0 }} tokens </template>
         <template #created_date="rowData">
           <span :title="rowData.item.created_date">{{ rowData.item.created_date_pretty }}</span>
@@ -55,7 +55,7 @@
         </template>
       </oc-table>
       <h2 class="oc-heading-divider">WebDAV Endpoints</h2>
-      <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true">
+      <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true" class="endpoint-table">
         <template #footer> {{ tokens.length || 0 }} endpoints </template>
         <template #webUrl="rowData">
           <a :href="rowData.item.webUrl" target="_blank">{{ rowData.item.webUrl }}</a>
@@ -200,12 +200,12 @@ export default {
       tokenToDelete: null,
       notifications: [],
       expiryStringGenerator: {
-        Minutes: () => this.create_token_expiry + 'm',
-        Hours: () => this.create_token_expiry + 'h',
-        Days: () => this.create_token_expiry * 24 + 'h',
-        Weeks: () => this.create_token_expiry * 24 * 7 + 'h',
-        Months: () => this.create_token_expiry * 24 * 30 + 'h',
-        Years: () => this.create_token_expiry * 24 * 365 + 'h'
+        Minutes: (amount: number) => amount + 'm',
+        Hours: (amount: number) => amount + 'h',
+        Days: (amount: number) => amount * 24 + 'h',
+        Weeks: (amount: number) => amount * 24 * 7 + 'h',
+        Months: (amount: number) => amount * 24 * 30 + 'h',
+        Years: (amount: number) => amount * 24 * 365 + 'h'
       }
     }
   },
@@ -273,6 +273,9 @@ export default {
       navigator.clipboard.writeText(rowData.item.root.webDavUrl)
       this.showNotification('WebDAV URL copied to clipboard', 'success')
     },
+    createExpiryString: function (amount, units) {
+      return this.expiryStringGenerator[units](amount)
+    },
     saveToken() {
       // Basic validation
       if (isNaN(this.create_token_expiry) || this.create_token_expiry <= 0) {
@@ -284,8 +287,9 @@ export default {
       if (this.create_token_label) {
         urlParams.append('label', this.create_token_label)
       }
-      const expiryString = this.expiryStringGenerator[this.create_token_expiry_units](
-        this.create_token_expiry
+      const expiryString = this.createExpiryString(
+        this.create_token_expiry,
+        this.create_token_expiry_units
       )
       urlParams.append('expiry', expiryString)
 

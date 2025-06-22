@@ -10,7 +10,7 @@ import { computed } from 'vue'
 import { useGettext } from 'vue3-gettext'
 
 export default defineWebApplication({
-  setup(args) {
+  setup(args: ApplicationSetupOptions) {
     const { $gettext } = useGettext()
 
     const appInfo = {
@@ -28,7 +28,7 @@ export default defineWebApplication({
       {
         path: '/tokens',
         name: 'tokens',
-        component: () => import('./views/AppTokens.vue'),
+        component: () => import('./App.vue'),
         meta: {
           authContext: 'user',
           title: $gettext('App Tokens')
