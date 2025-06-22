@@ -53,7 +53,7 @@
           }}</span>
         </template>
         <template #action="rowData">
-          <oc-button size="small" variant="danger" @click="deleteToken(rowData)">Delete</oc-button>
+          <oc-button size="small" variant="danger" class="delete-btn" @click="deleteToken(rowData)">Delete</oc-button>
         </template>
       </oc-table>
       <h2 class="oc-heading-divider">WebDAV Endpoints</h2>
