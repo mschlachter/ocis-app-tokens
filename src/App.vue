@@ -20,14 +20,14 @@
           label="Label (Optional)"
           class="oc-mb oc-hidden"
         />
-        <oc-grid flex class="oc-mb">
+        <oc-grid gutter="small" class="oc-mb oc-flex oc-flex-top">
           <oc-text-input
             v-model="create_token_expiry"
             label="Expires in"
             type="number"
             :error-message="create_token_error"
-            style="width: 8em"
-            class="expires-input oc-mr"
+            style="width: 5em"
+            class="expires-input"
           />
           <oc-select
             v-model="create_token_expiry_units"
@@ -315,7 +315,7 @@ export default {
               .then((tokenData) => {
                 this.createdToken = tokenData
                 this.create_token_error = null
-                this.showCreatedModal = true
+                this.openCreatedModal()
                 this.getTokens()
               })
               .catch((error) => {
@@ -337,7 +337,7 @@ export default {
     },
     deleteToken: function (rowData) {
       this.tokenToDelete = rowData.item.token
-      this.showDeleteModal = true
+      this.openDeletedModal()
     },
     confirmDelete: function () {
       const urlParams = new URLSearchParams()
@@ -365,6 +365,12 @@ export default {
           this.getTokens()
           this.closeDialog()
         })
+    },
+    openCreatedModal: function() {
+      this.showCreatedModal = true
+    },
+    openDeletedModal: function() {
+      this.showDeleteModal = true
     },
     closeDialog: function () {
       this.showCreatedModal = false

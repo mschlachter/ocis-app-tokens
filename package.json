@@ -11,7 +11,7 @@
     "build": "pnpm vite build",
     "build:w": "pnpm vite build --watch --mode development",
     "check:types": "vue-tsc --noEmit",
-    "lint": "eslint 'src/**/*.{js,ts,vue}' --color",
+    "lint": "eslint '{src,tests}/**/*.{js,ts,vue}' --color",
     "test:unit": "NODE_OPTIONS=--unhandled-rejections=throw vitest --watch=false",
     "test:unit:w": "NODE_OPTIONS=--unhandled-rejections=throw vitest"
   },
