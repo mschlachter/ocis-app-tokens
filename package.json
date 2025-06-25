@@ -11,31 +11,35 @@
     "build": "pnpm vite build",
     "build:w": "pnpm vite build --watch --mode development",
     "check:types": "vue-tsc --noEmit",
-    "lint": "eslint 'src/**/*.{js,ts,vue}' --color",
-    "test:unit": "NODE_OPTIONS=--unhandled-rejections=throw vitest"
+    "lint": "eslint '{src,tests}/**/*.{js,ts,vue}' --color",
+    "test:unit": "NODE_OPTIONS=--unhandled-rejections=throw vitest --watch=false",
+    "test:unit:w": "NODE_OPTIONS=--unhandled-rejections=throw vitest"
   },
   "devDependencies": {
-    "@ownclouders/eslint-config": "0.0.1",
-    "@ownclouders/extension-sdk": "0.0.7",
+    "@ownclouders/eslint-config": "^12.0.3",
+    "@ownclouders/extension-sdk": "^12.0.3",
+    "@ownclouders/web-test-helpers": "^12.0.3",
     "@ownclouders/prettier-config": "0.0.1",
     "@ownclouders/tsconfig": "0.0.6",
-    "@types/node": "20.16.11",
+    "@types/node": "22.15.32",
     "@vue/test-utils": "^2.4.6",
-    "eslint": "8.57.1",
-    "happy-dom": "^15.11.7",
-    "prettier": "3.3.3",
+    "eslint": "9.29.0",
+    "happy-dom": "^18.0.0",
+    "prettier": "3.5.3",
     "ts-node": "^10.9.2",
-    "typescript": "5.6.2",
-    "vite": "5.4.8",
-    "vitest": "2.1.2",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vitest": "3.2.4",
+    "vitest-mock-extended": "3.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
-    "vue-tsc": "2.1.6",
+    "vue-tsc": "2.2.10",
     "vue3-gettext": "^2.4.0"
   },
-  "peerDependencies": {
-    "@ownclouders/web-client": "^10.2.0",
-    "@ownclouders/web-pkg": "^10.2.0"
+  "dependencies": {
+    "@ownclouders/web-client": "^12.0.3",
+    "@ownclouders/web-pkg": "^12.0.3",
+    "javascript-time-ago": "^2.5.11"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -44,8 +48,5 @@
       ]
     }
   },
-  "packageManager": "pnpm@9.12.1",
-  "dependencies": {
-    "javascript-time-ago": "^2.5.11"
-  }
+  "packageManager": "pnpm@9.12.1"
 }

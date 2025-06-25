@@ -13,34 +13,36 @@
         is enabled and configured before using this plugin.
       </p>
       <h2 class="oc-heading-divider">Create Token</h2>
-      <form id="create-token-form">
+      <form id="create-token-form" @submit.prevent="saveToken()">
         <!-- Custom labels don't seem to be supported by API yet -->
         <oc-text-input
           v-model="create_token_label"
           label="Label (Optional)"
           class="oc-mb oc-hidden"
         />
-        <oc-grid flex class="oc-mb">
+        <oc-grid gutter="small" class="oc-mb oc-flex oc-flex-top">
           <oc-text-input
             v-model="create_token_expiry"
             label="Expires in"
             type="number"
             :error-message="create_token_error"
-            style="width: 8em"
+            style="width: 5em"
+            class="expires-input"
           />
           <oc-select
-            label="Units"
             v-model="create_token_expiry_units"
+            label="Units"
             :options="Object.keys(expiryStringGenerator)"
             :clearable="false"
             :searchable="false"
             style="width: 8em"
+            class="expires-unit-dropdown"
           />
         </oc-grid>
-        <oc-button variation="primary" class="oc-mb" @click="saveToken"> Create </oc-button>
+        <oc-button variation="primary" class="oc-mb save-token-btn" submit="submit"> Create </oc-button>
       </form>
       <h2 class="oc-heading-divider">Existing Tokens</h2>
-      <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true">
+      <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true" class="token-table">
         <template #footer> {{ tokens.length || 0 }} tokens </template>
         <template #created_date="rowData">
           <span :title="rowData.item.created_date">{{ rowData.item.created_date_pretty }}</span>
@@ -51,11 +53,11 @@
           }}</span>
         </template>
         <template #action="rowData">
-          <oc-button size="small" variant="danger" @click="deleteToken(rowData)">Delete</oc-button>
+          <oc-button size="small" variant="danger" class="delete-btn" @click="deleteToken(rowData)">Delete</oc-button>
         </template>
       </oc-table>
-      <h2 class="oc-heading-divider">Webdav Endpoints</h2>
-      <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true">
+      <h2 class="oc-heading-divider">WebDAV Endpoints</h2>
+      <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true" class="endpoint-table">
         <template #footer> {{ tokens.length || 0 }} endpoints </template>
         <template #webUrl="rowData">
           <a :href="rowData.item.webUrl" target="_blank">{{ rowData.item.webUrl }}</a>
@@ -67,7 +69,7 @@
         </template>
         <template #action="rowData">
           <oc-button size="small" variant="danger" @click="copyEndpointUrl(rowData)">
-            Copy Webdav URL
+            Copy WebDAV URL
           </oc-button>
         </template>
       </oc-table>
@@ -75,6 +77,7 @@
   </main>
   <oc-modal
     v-if="showCreatedModal"
+    class="created-modal"
     variation="success"
     icon="checkbox-circle"
     title="Token created"
@@ -88,6 +91,7 @@
   />
   <oc-modal
     v-if="showDeleteModal"
+    class="delete-confirm-modal"
     variation="danger"
     icon="alert"
     title="Delete token"
@@ -179,7 +183,7 @@ export default {
         },
         {
           name: 'webDavUrl',
-          title: 'Webdav URL',
+          title: 'WebDAV URL',
           alignH: 'left',
           type: 'slot'
         },
@@ -200,12 +204,12 @@ export default {
       tokenToDelete: null,
       notifications: [],
       expiryStringGenerator: {
-        Minutes: () => this.create_token_expiry + 'm',
-        Hours: () => this.create_token_expiry + 'h',
-        Days: () => this.create_token_expiry * 24 + 'h',
-        Weeks: () => this.create_token_expiry * 24 * 7 + 'h',
-        Months: () => this.create_token_expiry * 24 * 30 + 'h',
-        Years: () => this.create_token_expiry * 24 * 365 + 'h'
+        Minutes: (amount: number) => amount + 'm',
+        Hours: (amount: number) => amount + 'h',
+        Days: (amount: number) => amount * 24 + 'h',
+        Weeks: (amount: number) => amount * 24 * 7 + 'h',
+        Months: (amount: number) => amount * 24 * 30 + 'h',
+        Years: (amount: number) => amount * 24 * 365 + 'h'
       }
     }
   },
@@ -214,7 +218,7 @@ export default {
     this.getEndpoints()
   },
   methods: {
-    getTokens() {
+    getTokens: function () {
       const authStore = useAuthStore()
       const auth = new Auth({
         accessToken: authStore.accessToken,
@@ -271,9 +275,12 @@ export default {
     },
     copyEndpointUrl: function (rowData) {
       navigator.clipboard.writeText(rowData.item.root.webDavUrl)
-      this.showNotification('Webdav URL copied to clipboard', 'success')
+      this.showNotification('WebDAV URL copied to clipboard', 'success')
     },
-    saveToken() {
+    createExpiryString: function (amount, units) {
+      return this.expiryStringGenerator[units](amount)
+    },
+    saveToken: function () {
       // Basic validation
       if (isNaN(this.create_token_expiry) || this.create_token_expiry <= 0) {
         this.create_token_error = "'Expires in' must be a number greater than 0"
@@ -284,8 +291,9 @@ export default {
       if (this.create_token_label) {
         urlParams.append('label', this.create_token_label)
       }
-      const expiryString = this.expiryStringGenerator[this.create_token_expiry_units](
-        this.create_token_expiry
+      const expiryString = this.createExpiryString(
+        this.create_token_expiry,
+        this.create_token_expiry_units
       )
       urlParams.append('expiry', expiryString)
 
@@ -307,7 +315,7 @@ export default {
               .then((tokenData) => {
                 this.createdToken = tokenData
                 this.create_token_error = null
-                this.showCreatedModal = true
+                this.openCreatedModal()
                 this.getTokens()
               })
               .catch((error) => {
@@ -323,15 +331,15 @@ export default {
           console.error(error)
         })
     },
-    copyNewToken() {
+    copyNewToken: function () {
       navigator.clipboard.writeText(this.createdToken.token)
       this.showNotification('Token copied to clipboard', 'success')
     },
-    deleteToken(rowData) {
+    deleteToken: function (rowData) {
       this.tokenToDelete = rowData.item.token
-      this.showDeleteModal = true
+      this.openDeletedModal()
     },
-    confirmDelete() {
+    confirmDelete: function () {
       const urlParams = new URLSearchParams()
       urlParams.append('token', this.tokenToDelete)
 
@@ -358,17 +366,23 @@ export default {
           this.closeDialog()
         })
     },
-    closeDialog() {
+    openCreatedModal: function() {
+      this.showCreatedModal = true
+    },
+    openDeletedModal: function() {
+      this.showDeleteModal = true
+    },
+    closeDialog: function () {
       this.showCreatedModal = false
       this.showDeleteModal = false
     },
-    showNotification(title, status = 'passive') {
+    showNotification: function (title, status = 'passive') {
       this.notifications.push({
         title: title,
         status: status
       })
     },
-    removeNotification(item) {
+    removeNotification: function (item) {
       this.notifications = this.notifications.filter((el) => el !== item)
     }
   }
