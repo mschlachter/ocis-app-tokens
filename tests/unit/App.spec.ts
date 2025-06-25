@@ -75,9 +75,25 @@ describe('OCIS App Tokens', () => {
           }
         );
       },
+    }).mockResolvedValueOnce({
+      ok: true,
+      json: () => {
+        return Promise.resolve(
+          [
+            {
+              "token": "$2a$11$LUfq3OCXw73aUZ2iMb11g.dU7oTNF4fXYIldy233oec1u2KnBzoS.",
+              "expiration_date": "2025-06-24T22:27:22.811139664Z",
+              "created_date": "2025-06-21T22:27:22Z",
+              "label": "Generated via API"
+            }
+          ]
+        );
+      },
     });
 
-    (wrapper.find('.save-token-btn').element as HTMLButtonElement).click()
+    // Form submit / submit button click events aren't correctly handled by happy-dom yet..
+    // await wrapper.find('#create-token-form .save-token-btn').trigger('click')
+    wrapper.vm.saveToken();
     await wrapper.vm.$nextTick()
 
     expect(global.fetch).toHaveBeenLastCalledWith(

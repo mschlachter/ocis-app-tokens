@@ -13,7 +13,7 @@
         is enabled and configured before using this plugin.
       </p>
       <h2 class="oc-heading-divider">Create Token</h2>
-      <form id="create-token-form">
+      <form id="create-token-form" @submit.prevent="saveToken()">
         <!-- Custom labels don't seem to be supported by API yet -->
         <oc-text-input
           v-model="create_token_label"
@@ -27,7 +27,7 @@
             type="number"
             :error-message="create_token_error"
             style="width: 8em"
-            class="expires-input"
+            class="expires-input oc-mr"
           />
           <oc-select
             v-model="create_token_expiry_units"
@@ -39,7 +39,7 @@
             class="expires-unit-dropdown"
           />
         </oc-grid>
-        <oc-button variation="primary" class="oc-mb save-token-btn" @click="saveToken"> Create </oc-button>
+        <oc-button variation="primary" class="oc-mb save-token-btn" submit="submit"> Create </oc-button>
       </form>
       <h2 class="oc-heading-divider">Existing Tokens</h2>
       <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true" class="token-table">
@@ -218,7 +218,7 @@ export default {
     this.getEndpoints()
   },
   methods: {
-    getTokens() {
+    getTokens: function () {
       const authStore = useAuthStore()
       const auth = new Auth({
         accessToken: authStore.accessToken,
@@ -280,7 +280,7 @@ export default {
     createExpiryString: function (amount, units) {
       return this.expiryStringGenerator[units](amount)
     },
-    saveToken() {
+    saveToken: function () {
       // Basic validation
       if (isNaN(this.create_token_expiry) || this.create_token_expiry <= 0) {
         this.create_token_error = "'Expires in' must be a number greater than 0"
@@ -331,15 +331,15 @@ export default {
           console.error(error)
         })
     },
-    copyNewToken() {
+    copyNewToken: function () {
       navigator.clipboard.writeText(this.createdToken.token)
       this.showNotification('Token copied to clipboard', 'success')
     },
-    deleteToken(rowData) {
+    deleteToken: function (rowData) {
       this.tokenToDelete = rowData.item.token
       this.showDeleteModal = true
     },
-    confirmDelete() {
+    confirmDelete: function () {
       const urlParams = new URLSearchParams()
       urlParams.append('token', this.tokenToDelete)
 
@@ -366,17 +366,17 @@ export default {
           this.closeDialog()
         })
     },
-    closeDialog() {
+    closeDialog: function () {
       this.showCreatedModal = false
       this.showDeleteModal = false
     },
-    showNotification(title, status = 'passive') {
+    showNotification: function (title, status = 'passive') {
       this.notifications.push({
         title: title,
         status: status
       })
     },
-    removeNotification(item) {
+    removeNotification: function (item) {
       this.notifications = this.notifications.filter((el) => el !== item)
     }
   }
