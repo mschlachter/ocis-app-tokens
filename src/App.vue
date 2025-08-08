@@ -14,11 +14,11 @@
       </p>
       <h2 class="oc-heading-divider">Create Token</h2>
       <form id="create-token-form" @submit.prevent="saveToken()">
-        <!-- Custom labels don't seem to be supported by API yet -->
+        <!-- Custom labels only supported on OCIS > 7.2.0 -->
         <oc-text-input
           v-model="create_token_label"
           label="Label (Optional)"
-          class="oc-mb oc-hidden"
+          :class="'token-label oc-mb' + (enableCustomLabels ? '' : ' oc-hidden')"
         />
         <oc-grid gutter="small" class="oc-mb oc-flex oc-flex-top">
           <oc-text-input
@@ -125,6 +125,9 @@ import en from 'javascript-time-ago/locale/en'
 TimeAgo.addDefaultLocale(en)
 
 export default {
+  props: {
+    enableCustomLabels: { type: Boolean, required: false, default: true },
+  },
   data() {
     return {
       tokens: [],

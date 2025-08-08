@@ -170,6 +170,16 @@ describe('OCIS App Tokens', () => {
     expect(wrapper.find('.token-table tbody').element.childElementCount).equal(1)
   })
 
+  it('custom label field visible when enabled', async () => {
+    const { wrapper, } = await createWrapperAndFetchData(72, "Hours", true); // Enable custom labels
+    expect(wrapper.find('.token-label').element.classList).not.toContain('oc-hidden');
+  })
+
+  it('custom label field hidden when disabled', async () => {
+    const { wrapper, } = await createWrapperAndFetchData(72, "Hours", false); // Disable custom labels
+    expect(wrapper.find('.token-label').element.classList).toContain('oc-hidden');
+  })
+
   it('can add a token', async () => {
     // Set expiry to 3 days, which should be transformed into "72h"
     const { wrapper, mocked_fetch } = await createWrapperAndFetchData(3, "Days");
@@ -222,10 +232,10 @@ describe('OCIS App Tokens', () => {
   })
 })
 
-async function createWrapperAndFetchData(expiry: number = 72, expiry_units: string = "Hours") {
+async function createWrapperAndFetchData(expiry: number = 72, expiry_units: string = "Hours", enableCustomLabels: boolean = false) {
   const mocked_fetch = setupMockFetch()
 
-  const wrapper = createWrapper(expiry, expiry_units)
+  const wrapper = createWrapper(expiry, expiry_units, enableCustomLabels)
   disableModals(wrapper)
 
   // Let requests finish and tables load
@@ -235,13 +245,14 @@ async function createWrapperAndFetchData(expiry: number = 72, expiry_units: stri
   return { wrapper, mocked_fetch }
 }
 
-function createWrapper(expiry: number = 72, expiry_units: string = "Hours") {
+function createWrapper(expiry: number = 72, expiry_units: string = "Hours", enableCustomLabels: boolean = false) {
   return mount(App, {
     props: {
       resource: mock<Resource>(),
       applicationConfig: mock<AppConfigObject>(),
       create_token_expiry: expiry,
-      create_token_expiry_units: expiry_units
+      create_token_expiry_units: expiry_units,
+      enableCustomLabels
     },
     global: {
       plugins: [...defaultPlugins({ piniaOptions: { themeState: { currentTheme: { isDark: false } } } })]

@@ -1,3 +1,6 @@
 {
-  "entrypoint": "index.js"
+  "entrypoint": "index.js",
+  "config": {
+    "enableCustomLabels": false
+  }
 }
