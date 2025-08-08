@@ -6,11 +6,13 @@ import {
 } from '@ownclouders/web-pkg'
 import { urlJoin } from '@ownclouders/web-client'
 import { RouteRecordRaw } from 'vue-router'
-import { computed } from 'vue'
+import { computed, h } from 'vue'
 import { useGettext } from 'vue3-gettext'
+import { AppTokensConfigSchema } from './types'
+import App from './App.vue'
 
 export default defineWebApplication({
-  setup(args: ApplicationSetupOptions) {
+  setup({ applicationConfig }: ApplicationSetupOptions) {
     const { $gettext } = useGettext()
 
     const appInfo = {
@@ -20,6 +22,8 @@ export default defineWebApplication({
       color: '#5A0001'
     }
 
+    const { enableCustomLabels } = AppTokensConfigSchema.parse(applicationConfig);
+
     const routes: RouteRecordRaw[] = [
       {
         path: '/',
@@ -28,7 +32,7 @@ export default defineWebApplication({
       {
         path: '/tokens',
         name: 'tokens',
-        component: () => import('./App.vue'),
+        component: h(App, { enableCustomLabels }),
         meta: {
           authContext: 'user',
           title: $gettext('App Tokens')
@@ -36,27 +40,24 @@ export default defineWebApplication({
       }
     ]
 
-    const extensions = ({ applicationConfig }: ApplicationSetupOptions) => {
-      return computed<Extension[]>(() => {
-        const menuItems: AppMenuItemExtension[] = [
-          {
-            // registers a menu item for the app switcher
-            id: `app.${appInfo.id}.menuItem`,
-            type: 'appMenuItem',
-            label: () => appInfo.name,
-            color: appInfo.color,
-            icon: appInfo.icon,
-            path: urlJoin(appInfo.id)
-          }
-        ]
-        return [...menuItems]
-      })
-    }
+    const extensions = computed<Extension[]>(() => {
+      const menuItems: AppMenuItemExtension[] = [
+        {
+          id: `app.${appInfo.id}.menuItem`,
+          type: 'appMenuItem',
+          label: () => appInfo.name,
+          color: appInfo.color,
+          icon: appInfo.icon,
+          path: urlJoin(appInfo.id)
+        }
+      ]
+      return [...menuItems]
+    })
 
     return {
       appInfo,
       routes,
-      extensions: extensions(args)
+      extensions: extensions
     }
   }
 })
