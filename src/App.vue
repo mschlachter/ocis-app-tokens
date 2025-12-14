@@ -42,7 +42,7 @@
         <oc-button variation="primary" class="oc-mb save-token-btn" submit="submit"> Create </oc-button>
       </form>
       <h2 class="oc-heading-divider">Existing Tokens</h2>
-      <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true" class="token-table">
+      <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true" :hover="true" idKey="token" class="token-table">
         <template #footer> {{ tokens.length || 0 }} tokens </template>
         <template #created_date="rowData">
           <span :title="rowData.item.created_date">{{ rowData.item.created_date_pretty }}</span>
@@ -57,18 +57,18 @@
         </template>
       </oc-table>
       <h2 class="oc-heading-divider">WebDAV Endpoints</h2>
-      <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true" class="endpoint-table">
+      <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true" :hover="true" idKey="driveAlias" class="endpoint-table">
         <template #footer> {{ tokens.length || 0 }} endpoints </template>
         <template #webUrl="rowData">
-          <a :href="rowData.item.webUrl" target="_blank">{{ rowData.item.webUrl }}</a>
+          <a class="long-link-text" :href="rowData.item.webUrl" target="_blank">{{ rowData.item.webUrl }}</a>
         </template>
         <template #webDavUrl="rowData">
-          <a :href="rowData.item.root.webDavUrl" target="_blank">{{
+          <a class="long-link-text" :href="rowData.item.root.webDavUrl" target="_blank">{{
             rowData.item.root.webDavUrl
           }}</a>
         </template>
         <template #action="rowData">
-          <oc-button size="small" variant="danger" @click="copyEndpointUrl(rowData)">
+          <oc-button class="oc-text-nowrap" size="small" variant="danger" @click="copyEndpointUrl(rowData)">
             Copy WebDAV URL
           </oc-button>
         </template>
@@ -95,7 +95,7 @@
     variation="danger"
     icon="alert"
     title="Delete token"
-    message="Are you sure you want to delete this token? All applications using this token will lose access."
+    :message="`Are you sure you want to delete this token (${tokenToDelete?.label})? All applications using this token will lose access.`"
     button-cancel-text="Cancel"
     button-confirm-text="Delete"
     button-confirm-appearance="filled"
@@ -135,30 +135,41 @@ export default {
         {
           name: 'label',
           title: 'Label',
-          alignH: 'left'
+          alignH: 'left',
+          thClass: 'th-label',
+          tdClass: 'td-label'
         },
         {
           name: 'created_date',
           title: 'Created',
           alignH: 'left',
-          type: 'slot'
+          type: 'slot',
+          thClass: 'th-created-date',
+          tdClass: 'td-created-date'
         },
         {
           name: 'expiration_date',
           title: 'Expires',
           alignH: 'left',
-          type: 'slot'
+          type: 'slot',
+          thClass: 'th-expiration-date',
+          tdClass: 'td-expiration-date'
         },
         {
           name: 'token',
           title: 'Encrypted Token',
-          alignH: 'left'
+          alignH: 'left',
+          wrap: 'break',
+          thClass: 'th-token',
+          tdClass: 'td-token'
         },
         {
           name: 'action',
           title: '',
           type: 'slot',
-          width: 'shrink'
+          width: 'shrink',
+          thClass: 'th-action',
+          tdClass: 'td-action'
         }
       ],
       endpoints: [],
@@ -166,35 +177,47 @@ export default {
         {
           name: 'name',
           title: 'Drive Name',
-          alignH: 'left'
+          alignH: 'left',
+          thClass: 'th-drive-name',
+          tdClass: 'td-drive-name'
         },
         {
           name: 'driveAlias',
           title: 'Drive Path',
-          alignH: 'left'
+          alignH: 'left',
+          thClass: 'th-drive-alias',
+          tdClass: 'td-drive-alias'
         },
         {
           name: 'driveType',
           title: 'Type',
-          alignH: 'left'
+          alignH: 'left',
+          thClass: 'th-drive-type',
+          tdClass: 'td-drive-type'
         },
         {
           name: 'webUrl',
           title: 'Web URL',
           alignH: 'left',
-          type: 'slot'
+          type: 'slot',
+          thClass: 'th-web-url',
+          tdClass: 'td-web-url'
         },
         {
           name: 'webDavUrl',
           title: 'WebDAV URL',
           alignH: 'left',
-          type: 'slot'
+          type: 'slot',
+          thClass: 'th-webdav-url',
+          tdClass: 'td-webdav-url'
         },
         {
           name: 'action',
           title: '',
           type: 'slot',
-          width: 'shrink'
+          width: 'shrink',
+          thClass: 'th-action',
+          tdClass: 'td-action'
         }
       ],
       create_token_label: null,
@@ -319,18 +342,21 @@ export default {
                 this.createdToken = tokenData
                 this.create_token_error = null
                 this.openCreatedModal()
-                this.getTokens()
+                this.create_token_label = null
               })
               .catch((error) => {
-                this.showNotification('Unexpected response from Auth App Service', 'danger')
+                this.showNotification('Unexpected response from Token Service', 'danger')
                 console.error(error)
+              })
+              .finally(() => {
+                this.getTokens()
               })
           } else {
             apiResponse.text().then((errorMessage) => (this.create_token_error = errorMessage))
           }
         })
         .catch((error) => {
-          this.showNotification('Error connecting to Auth App Service', 'danger')
+          this.showNotification('Error connecting to Token Service', 'danger')
           console.error(error)
         })
     },
@@ -339,12 +365,12 @@ export default {
       this.showNotification('Token copied to clipboard', 'success')
     },
     deleteToken: function (rowData) {
-      this.tokenToDelete = rowData.item.token
+      this.tokenToDelete = rowData.item
       this.openDeletedModal()
     },
     confirmDelete: function () {
       const urlParams = new URLSearchParams()
-      urlParams.append('token', this.tokenToDelete)
+      urlParams.append('token', this.tokenToDelete.token)
 
       const authStore = useAuthStore()
       const auth = new Auth({
@@ -398,13 +424,32 @@ main {
 
   .tokens-page {
     width: 80rem;
+
+    .long-link-text {
+      display: inline-block;
+      max-width: min(20vw, 20rem);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
   }
+}
+@media (max-width: 800px) {
+    .th-webdav-url, .td-webdav-url {
+      display: none;
+    }
 }
 @media (max-width: 1200px) {
   main .tokens-page {
-    width: 100%;
+    width: calc(100vw - (var(--oc-space-medium) * 2));
     padding-left: var(--oc-space-medium);
     padding-right: var(--oc-space-medium);
+
+    .th-created-date, .td-created-date,
+    .th-drive-type, .td-drive-type,
+    .th-drive-alias, .td-drive-alias {
+      display: none;
+    }
   }
 }
 </style>
