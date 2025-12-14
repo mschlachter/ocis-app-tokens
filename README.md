@@ -1,7 +1,7 @@
 # ocis-app-tokens
 This plugin for ownCloud Infinite Scale enables a UI to create and manage app tokens, which enable third-party apps to connect to Infinite Scale.
 
-![screenshot](https://github.com/user-attachments/assets/12dafb58-5b70-47e0-ba97-589535e7cfd4)
+<img width="2160" height="1620" alt="screenshot of application showing the visual display" src="https://github.com/user-attachments/assets/e3127d65-ce30-47e5-8e4f-7e1b2004075d" />
 
 ## Getting Started
 
