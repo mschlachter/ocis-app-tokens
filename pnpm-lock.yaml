@@ -32,7 +32,7 @@ importers:
         version: 0.0.6
       '@ownclouders/web-test-helpers':
         specifier: ^12.0.3
-        version: 12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))
+        version: 12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))
       '@types/node':
         specifier: 22.15.32
         version: 22.15.32
@@ -43,8 +43,8 @@ importers:
         specifier: 9.29.0
         version: 9.29.0
       happy-dom:
-        specifier: ^20.0.2
-        version: 20.0.2
+        specifier: ^20.8.8
+        version: 20.8.8
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -59,10 +59,10 @@ importers:
         version: 6.4.1(@types/node@22.15.32)(sass@1.69.7)
       vitest:
         specifier: 3.2.4
-        version: 3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7)
+        version: 3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7)
       vitest-mock-extended:
         specifier: 3.1.0
-        version: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7))
+        version: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.3)
@@ -988,9 +988,6 @@ packages:
   '@types/minimatch@5.1.2':
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
-  '@types/node@20.19.24':
-    resolution: {integrity: sha512-FE5u0ezmi6y9OZEzlJfg37mqqf6ZDSF2V/NLjUyGrR9uTZ7Sb9F7bLNZ03S4XVUNRWGA7Ck4c1kK+YnuWjl+DA==}
-
   '@types/node@22.15.32':
     resolution: {integrity: sha512-3jigKqgSjsH6gYZv2nEsqdXfZqIFGAV36XYYjf9KGZ3PSG+IhLecqPnI310RvjutyMwifE2hhhNEklOUrvx/wA==}
 
@@ -1011,6 +1008,9 @@ packages:
 
   '@types/whatwg-mimetype@3.0.2':
     resolution: {integrity: sha512-c2AKvDT8ToxLIOUlN51gTiHXflsfIFisS4pO7pDPoKouJCESkhZnEy623gwP9laCy5lnLDAw1vAzu2vM2YLOrA==}
+
+  '@types/ws@8.18.1':
+    resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
   '@typescript-eslint/eslint-plugin@8.34.1':
     resolution: {integrity: sha512-STXcN6ebF6li4PxwNeFnqF8/2BNDvBupf2OPx2yWNzr6mKNGF7q49VM00Pz5FaomJyqvbXpY6PhO+T9w139YEQ==}
@@ -1319,8 +1319,8 @@ packages:
   base-64@1.0.0:
     resolution: {integrity: sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg==}
 
-  baseline-browser-mapping@2.10.10:
-    resolution: {integrity: sha512-sUoJ3IMxx4AyRqO4MLeHlnGDkyXRoUG0/AI9fjK+vS72ekpV0yWVY7O0BVjmBcRtkNcsAO2QDZ4tdKKGoI6YaQ==}
+  baseline-browser-mapping@2.10.11:
+    resolution: {integrity: sha512-DAKrHphkJyiGuau/cFieRYhcTFeK/lBuD++C7cZ6KZHbMhBrisoi+EvhQ5RZrIfV5qwsW8kgQ07JIC+MDJRAhg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -1374,8 +1374,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001780:
-    resolution: {integrity: sha512-llngX0E7nQci5BPJDqoZSbuZ5Bcs9F5db7EtgfwBerX9XGtkkiO4NwfDDIRzHTTwcYC8vC7bmeUEPGrKlR/TkQ==}
+  caniuse-lite@1.0.30001781:
+    resolution: {integrity: sha512-RdwNCyMsNBftLjW6w01z8bKEvT6e/5tpPVEgtn22TiLGlstHOVecsX2KHFkD5e/vRnIE4EGzpuIODb3mtswtkw==}
 
   chai@5.2.0:
     resolution: {integrity: sha512-mCuXncKXk5iCLhfhwTc0izo0gtEmpz5CtG2y8GiOINBlMVS6v8TMRc5TaLWKS6692m9+dVVfzgeVxR5UxWHTYw==}
@@ -1730,8 +1730,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  electron-to-chromium@1.5.321:
-    resolution: {integrity: sha512-L2C7Q279W2D/J4PLZLk7sebOILDSWos7bMsMNN06rK482umHUrh/3lM8G7IlHFOYip2oAg5nha1rCMxr/rs6ZQ==}
+  electron-to-chromium@1.5.327:
+    resolution: {integrity: sha512-hLxLdIJDf8zIzKoH2TPCs+Botc+wUmj9sp4jVMwklY/sKleM8xxxOExRX3Gxj73nCXmJe3anhG7SvsDDPDvmuQ==}
 
   emoji-mart@5.6.0:
     resolution: {integrity: sha512-eJp3QRe79pjwa+duv+n7+5YsNhRcMl812EcFVwrnRvYKoNPoQb5qxU8DG6Bgwji0akHdp6D4Ln6tYLG58MFSow==}
@@ -1755,6 +1755,10 @@ packages:
 
   entities@5.0.0:
     resolution: {integrity: sha512-BeJFvFRJddxobhvEdm5GqHzRV/X+ACeuw0/BuuxsCh1EUZcAIz8+kYmBp/LrQuloy6K1f3a0M7+IhmZ7QnkISA==}
+    engines: {node: '>=0.12'}
+
+  entities@7.0.1:
+    resolution: {integrity: sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA==}
     engines: {node: '>=0.12'}
 
   error-ex@1.3.2:
@@ -2095,8 +2099,8 @@ packages:
   hachure-fill@0.5.2:
     resolution: {integrity: sha512-3GKBOn+m2LX9iq+JC1064cSFprJY4jL1jCXTcpnfER5HYE2l/4EfWSGzkPa/ZDBmYI0ZOEj5VHV/eKnPGkHuOg==}
 
-  happy-dom@20.0.2:
-    resolution: {integrity: sha512-pYOyu624+6HDbY+qkjILpQGnpvZOusItCk+rvF5/V+6NkcgTKnbOldpIy22tBnxoaLtlM9nXgoqAcW29/B7CIw==}
+  happy-dom@20.8.8:
+    resolution: {integrity: sha512-5/F8wxkNxYtsN0bXfMwIyNLZ9WYsoOYPbmoluqVJqv8KBUbcyKZawJ7uYK4WTX8IHBLYv+VXIwfeNDPy1oKMwQ==}
     engines: {node: '>=20.0.0'}
 
   has-flag@4.0.0:
@@ -2618,16 +2622,12 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  picomatch@2.3.1:
-    resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
+  picomatch@2.3.2:
+    resolution: {integrity: sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA==}
     engines: {node: '>=8.6'}
 
-  picomatch@4.0.2:
-    resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
-    engines: {node: '>=12'}
-
-  picomatch@4.0.3:
-    resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
+  picomatch@4.0.4:
+    resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
   pinia@3.0.3:
@@ -3238,6 +3238,18 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
+  ws@8.20.0:
+    resolution: {integrity: sha512-sAt8BhgNbzCtgGbt2OxmpuryO63ZoDk/sqaB/znQm94T4fCEsy/yV+7CdC1kJhOU9lboAEU7R3kquuycDoibVA==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
   xml-js@1.6.11:
     resolution: {integrity: sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==}
     hasBin: true
@@ -3254,8 +3266,8 @@ packages:
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
-  yaml@1.10.2:
-    resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
+  yaml@1.10.3:
+    resolution: {integrity: sha512-vIYeF1u3CjlhAFekPPAk2h/Kv4T3mAkMox5OymRiJQB0spDP10LHvt+K7G9Ny6NuuMAb25/6n1qyUjAcGNf/AA==}
     engines: {node: '>= 6'}
 
   yn@3.1.1:
@@ -4120,7 +4132,7 @@ snapshots:
       - typescript
       - vue
 
-  '@ownclouders/web-test-helpers@12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))':
+  '@ownclouders/web-test-helpers@12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))':
     dependencies:
       '@casl/ability': 6.8.0
       '@casl/vue': 2.2.2(@casl/ability@6.8.0)(vue@3.5.13(typescript@5.8.3))
@@ -4130,7 +4142,7 @@ snapshots:
       '@pinia/testing': 1.0.2(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))
       '@vue/test-utils': 2.4.6
       axios: 1.9.0
-      vitest-mock-extended: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7))
+      vitest-mock-extended: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))
       vue: 3.5.13(typescript@5.8.3)
       vue-router: 4.5.1(vue@3.5.13(typescript@5.8.3))
       vue3-gettext: 2.4.0(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))
@@ -4419,10 +4431,6 @@ snapshots:
 
   '@types/minimatch@5.1.2': {}
 
-  '@types/node@20.19.24':
-    dependencies:
-      undici-types: 6.21.0
-
   '@types/node@22.15.32':
     dependencies:
       undici-types: 6.21.0
@@ -4439,6 +4447,10 @@ snapshots:
   '@types/web-bluetooth@0.0.21': {}
 
   '@types/whatwg-mimetype@3.0.2': {}
+
+  '@types/ws@8.18.1':
+    dependencies:
+      '@types/node': 22.15.32
 
   '@typescript-eslint/eslint-plugin@8.34.1(@typescript-eslint/parser@8.34.1(eslint@9.29.0)(typescript@5.8.3))(eslint@9.29.0)(typescript@5.8.3)':
     dependencies:
@@ -4804,7 +4816,7 @@ snapshots:
   anymatch@3.1.3:
     dependencies:
       normalize-path: 3.0.0
-      picomatch: 2.3.1
+      picomatch: 2.3.2
 
   arg@4.1.3: {}
 
@@ -4838,7 +4850,7 @@ snapshots:
 
   base-64@1.0.0: {}
 
-  baseline-browser-mapping@2.10.10: {}
+  baseline-browser-mapping@2.10.11: {}
 
   binary-extensions@2.3.0: {}
 
@@ -4861,9 +4873,9 @@ snapshots:
 
   browserslist@4.28.1:
     dependencies:
-      baseline-browser-mapping: 2.10.10
-      caniuse-lite: 1.0.30001780
-      electron-to-chromium: 1.5.321
+      baseline-browser-mapping: 2.10.11
+      caniuse-lite: 1.0.30001781
+      electron-to-chromium: 1.5.327
       node-releases: 2.0.36
       update-browserslist-db: 1.2.3(browserslist@4.28.1)
 
@@ -4887,7 +4899,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001780: {}
+  caniuse-lite@1.0.30001781: {}
 
   chai@5.2.0:
     dependencies:
@@ -5003,7 +5015,7 @@ snapshots:
       import-fresh: 3.3.1
       parse-json: 5.2.0
       path-type: 4.0.0
-      yaml: 1.10.2
+      yaml: 1.10.3
 
   create-require@1.1.1: {}
 
@@ -5262,7 +5274,7 @@ snapshots:
       minimatch: 9.0.1
       semver: 7.7.1
 
-  electron-to-chromium@1.5.321: {}
+  electron-to-chromium@1.5.327: {}
 
   emoji-mart@5.6.0: {}
 
@@ -5280,6 +5292,8 @@ snapshots:
   entities@4.5.0: {}
 
   entities@5.0.0: {}
+
+  entities@7.0.1: {}
 
   error-ex@1.3.2:
     dependencies:
@@ -5527,9 +5541,9 @@ snapshots:
     dependencies:
       reusify: 1.1.0
 
-  fdir@6.5.0(picomatch@4.0.3):
+  fdir@6.5.0(picomatch@4.0.4):
     optionalDependencies:
-      picomatch: 4.0.3
+      picomatch: 4.0.4
 
   fetch-blob@3.2.0:
     dependencies:
@@ -5673,11 +5687,17 @@ snapshots:
 
   hachure-fill@0.5.2: {}
 
-  happy-dom@20.0.2:
+  happy-dom@20.8.8:
     dependencies:
-      '@types/node': 20.19.24
+      '@types/node': 22.15.32
       '@types/whatwg-mimetype': 3.0.2
+      '@types/ws': 8.18.1
+      entities: 7.0.1
       whatwg-mimetype: 3.0.0
+      ws: 8.20.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   has-flag@4.0.0: {}
 
@@ -5985,7 +6005,7 @@ snapshots:
   micromatch@4.0.8:
     dependencies:
       braces: 3.0.3
-      picomatch: 2.3.1
+      picomatch: 2.3.2
 
   mime-db@1.52.0: {}
 
@@ -6148,11 +6168,9 @@ snapshots:
 
   picocolors@1.1.1: {}
 
-  picomatch@2.3.1: {}
+  picomatch@2.3.2: {}
 
-  picomatch@4.0.2: {}
-
-  picomatch@4.0.3: {}
+  picomatch@4.0.4: {}
 
   pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)):
     dependencies:
@@ -6235,7 +6253,7 @@ snapshots:
 
   readdirp@3.6.0:
     dependencies:
-      picomatch: 2.3.1
+      picomatch: 2.3.2
 
   relative-time-format@1.1.6: {}
 
@@ -6422,13 +6440,13 @@ snapshots:
 
   tinyglobby@0.2.14:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.3)
-      picomatch: 4.0.3
+      fdir: 6.5.0(picomatch@4.0.4)
+      picomatch: 4.0.4
 
   tinyglobby@0.2.15:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.3)
-      picomatch: 4.0.3
+      fdir: 6.5.0(picomatch@4.0.4)
+      picomatch: 4.0.4
 
   tinypool@1.1.1: {}
 
@@ -6450,7 +6468,7 @@ snapshots:
 
   ts-declaration-location@1.0.7(typescript@5.8.3):
     dependencies:
-      picomatch: 4.0.3
+      picomatch: 4.0.4
       typescript: 5.8.3
 
   ts-dedent@2.2.0: {}
@@ -6560,8 +6578,8 @@ snapshots:
   vite@6.4.1(@types/node@22.15.32)(sass@1.69.7):
     dependencies:
       esbuild: 0.25.12
-      fdir: 6.5.0(picomatch@4.0.3)
-      picomatch: 4.0.3
+      fdir: 6.5.0(picomatch@4.0.4)
+      picomatch: 4.0.4
       postcss: 8.5.6
       rollup: 4.59.0
       tinyglobby: 0.2.15
@@ -6570,13 +6588,13 @@ snapshots:
       fsevents: 2.3.3
       sass: 1.69.7
 
-  vitest-mock-extended@3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7)):
+  vitest-mock-extended@3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7)):
     dependencies:
       ts-essentials: 10.1.1(typescript@5.8.3)
       typescript: 5.8.3
-      vitest: 3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7)
+      vitest: 3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7)
 
-  vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.0.2)(sass@1.69.7):
+  vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
@@ -6591,7 +6609,7 @@ snapshots:
       expect-type: 1.2.1
       magic-string: 0.30.17
       pathe: 2.0.3
-      picomatch: 4.0.2
+      picomatch: 4.0.4
       std-env: 3.9.0
       tinybench: 2.9.0
       tinyexec: 0.3.2
@@ -6603,7 +6621,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.15.32
-      happy-dom: 20.0.2
+      happy-dom: 20.8.8
     transitivePeerDependencies:
       - jiti
       - less
@@ -6757,6 +6775,8 @@ snapshots:
 
   wrappy@1.0.2: {}
 
+  ws@8.20.0: {}
+
   xml-js@1.6.11:
     dependencies:
       sax: 1.4.1
@@ -6770,7 +6790,7 @@ snapshots:
 
   yallist@3.1.1: {}
 
-  yaml@1.10.2: {}
+  yaml@1.10.3: {}
 
   yn@3.1.1: {}
 
