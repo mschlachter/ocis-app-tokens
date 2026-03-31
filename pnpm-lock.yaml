@@ -32,7 +32,7 @@ importers:
         version: 0.0.6
       '@ownclouders/web-test-helpers':
         specifier: ^12.0.3
-        version: 12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))
+        version: 12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))
       '@types/node':
         specifier: 22.15.32
         version: 22.15.32
@@ -43,8 +43,8 @@ importers:
         specifier: 9.29.0
         version: 9.29.0
       happy-dom:
-        specifier: ^20.8.8
-        version: 20.8.8
+        specifier: ^20.8.9
+        version: 20.8.9
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -59,10 +59,10 @@ importers:
         version: 6.4.1(@types/node@22.15.32)(sass@1.69.7)
       vitest:
         specifier: 3.2.4
-        version: 3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7)
+        version: 3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7)
       vitest-mock-extended:
         specifier: 3.1.0
-        version: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))
+        version: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7))
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.3)
@@ -1319,8 +1319,8 @@ packages:
   base-64@1.0.0:
     resolution: {integrity: sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg==}
 
-  baseline-browser-mapping@2.10.12:
-    resolution: {integrity: sha512-qyq26DxfY4awP2gIRXhhLWfwzwI+N5Nxk6iQi8EFizIaWIjqicQTE4sLnZZVdeKPRcVNoJOkkpfzoIYuvCKaIQ==}
+  baseline-browser-mapping@2.10.13:
+    resolution: {integrity: sha512-BL2sTuHOdy0YT1lYieUxTw/QMtPBC3pmlJC6xk8BBYVv6vcw3SGdKemQ+Xsx9ik2F/lYDO9tqsFQH1r9PFuHKw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -1344,8 +1344,8 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  browserslist@4.28.1:
-    resolution: {integrity: sha512-ZC5Bd0LgJXgwGqUknZY/vkUQ04r8NXnJZ3yYi4vDmSiZmC/pdSN0NbNRPxZpbtO4uAfDUAFffO8IZoM3Gj8IkA==}
+  browserslist@4.28.2:
+    resolution: {integrity: sha512-48xSriZYYg+8qXna9kwqjIVzuQxi+KYWp2+5nCYnYKPTr0LvD89Jqk2Or5ogxz0NUMfIjhh2lIUX/LyX9B4oIg==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -1374,8 +1374,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001781:
-    resolution: {integrity: sha512-RdwNCyMsNBftLjW6w01z8bKEvT6e/5tpPVEgtn22TiLGlstHOVecsX2KHFkD5e/vRnIE4EGzpuIODb3mtswtkw==}
+  caniuse-lite@1.0.30001782:
+    resolution: {integrity: sha512-dZcaJLJeDMh4rELYFw1tvSn1bhZWYFOt468FcbHHxx/Z/dFidd1I6ciyFdi3iwfQCyOjqo9upF6lGQYtMiJWxw==}
 
   chai@5.2.0:
     resolution: {integrity: sha512-mCuXncKXk5iCLhfhwTc0izo0gtEmpz5CtG2y8GiOINBlMVS6v8TMRc5TaLWKS6692m9+dVVfzgeVxR5UxWHTYw==}
@@ -1730,8 +1730,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  electron-to-chromium@1.5.328:
-    resolution: {integrity: sha512-QNQ5l45DzYytThO21403XN3FvK0hOkWDG8viNf6jqS42msJ8I4tGDSpBCgvDRRPnkffafiwAym2X2eHeGD2V0w==}
+  electron-to-chromium@1.5.329:
+    resolution: {integrity: sha512-/4t+AS1l4S3ZC0Ja7PHFIWeBIxGA3QGqV8/yKsP36v7NcyUCl+bIcmw6s5zVuMIECWwBrAK/6QLzTmbJChBboQ==}
 
   emoji-mart@5.6.0:
     resolution: {integrity: sha512-eJp3QRe79pjwa+duv+n7+5YsNhRcMl812EcFVwrnRvYKoNPoQb5qxU8DG6Bgwji0akHdp6D4Ln6tYLG58MFSow==}
@@ -1939,15 +1939,15 @@ packages:
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
 
-  fast-xml-builder@1.0.0:
-    resolution: {integrity: sha512-fpZuDogrAgnyt9oDDz+5DBz0zgPdPZz6D4IR7iESxRXElrlGTRkHJ9eEt+SACRJwT0FNFrt71DFQIUFBJfX/uQ==}
+  fast-xml-builder@1.1.4:
+    resolution: {integrity: sha512-f2jhpN4Eccy0/Uz9csxh3Nu6q4ErKxf0XIsasomfOihuSUa3/xw6w8dnOtCDgEItQFJG8KyXPzQXzcODDrrbOg==}
 
-  fast-xml-parser@4.5.4:
-    resolution: {integrity: sha512-jE8ugADnYOBsu1uaoayVl1tVKAMNOXyjwvv2U6udEA2ORBhDooJDWoGxTkhd4Qn4yh59JVVt/pKXtjPwx9OguQ==}
+  fast-xml-parser@4.5.5:
+    resolution: {integrity: sha512-cK9c5I/DwIOI7/Q7AlGN3DuTdwN61gwSfL8rvuVPK+0mcCNHHGxRrpiFtaZZRfRMJL3Gl8B2AFlBG6qXf03w9A==}
     hasBin: true
 
-  fast-xml-parser@5.4.1:
-    resolution: {integrity: sha512-BQ30U1mKkvXQXXkAGcuyUA/GA26oEB7NzOtsxCDtyu62sjGw5QraKFhx2Em3WQNjPw9PG6MQ9yuIIgkSDfGu5A==}
+  fast-xml-parser@5.5.9:
+    resolution: {integrity: sha512-jldvxr1MC6rtiZKgrFnDSvT8xuH+eJqxqOBThUVjYrxssYTo1avZLGql5l0a0BAERR01CadYzZ83kVEkbyDg+g==}
     hasBin: true
 
   fastq@1.19.1:
@@ -2099,8 +2099,8 @@ packages:
   hachure-fill@0.5.2:
     resolution: {integrity: sha512-3GKBOn+m2LX9iq+JC1064cSFprJY4jL1jCXTcpnfER5HYE2l/4EfWSGzkPa/ZDBmYI0ZOEj5VHV/eKnPGkHuOg==}
 
-  happy-dom@20.8.8:
-    resolution: {integrity: sha512-5/F8wxkNxYtsN0bXfMwIyNLZ9WYsoOYPbmoluqVJqv8KBUbcyKZawJ7uYK4WTX8IHBLYv+VXIwfeNDPy1oKMwQ==}
+  happy-dom@20.8.9:
+    resolution: {integrity: sha512-Tz23LR9T9jOGVZm2x1EPdXqwA37G/owYMxRwU0E4miurAtFsPMQ1d2Jc2okUaSjZqAFz2oEn3FLXC5a0a+siyA==}
     engines: {node: '>=20.0.0'}
 
   has-flag@4.0.0:
@@ -2590,6 +2590,10 @@ packages:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
 
+  path-expression-matcher@1.2.0:
+    resolution: {integrity: sha512-DwmPWeFn+tq7TiyJ2CxezCAirXjFxvaiD03npak3cRjlP9+OjTmSy1EpIrEbh+l6JgUundniloMLDQ/6VTdhLQ==}
+    engines: {node: '>=14.0.0'}
+
   path-is-absolute@1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
@@ -2875,8 +2879,8 @@ packages:
   strnum@1.1.2:
     resolution: {integrity: sha512-vrN+B7DBIoTTZjnPNewwhx6cBA/H+IS7rfW68n7XxC1y7uoiGQBxaKzqucGUgavX15dJgiGztLJ8vxuEzwqBdA==}
 
-  strnum@2.1.2:
-    resolution: {integrity: sha512-l63NF9y/cLROq/yqKXSLtcMeeyOfnSQlfMSlzFt/K73oIaD8DGaQWd7Z34X9GPiKqP5rbSh84Hl4bOlLcjiSrQ==}
+  strnum@2.2.2:
+    resolution: {integrity: sha512-DnR90I+jtXNSTXWdwrEy9FakW7UX+qUZg28gj5fk2vxxl7uS/3bpI4fjFYVmdK9etptYBPNkpahuQnEwhwECqA==}
 
   style-mod@4.1.2:
     resolution: {integrity: sha512-wnD1HyVqpJUI2+eKZ+eo1UwghftP6yuFheBqqe+bWCotBjC2K1YnteJILRMs3SM4V/0dLEW1SC27MWP5y+mwmw==}
@@ -3349,7 +3353,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.29.0
       '@babel/helper-validator-option': 7.27.1
-      browserslist: 4.28.1
+      browserslist: 4.28.2
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -4068,7 +4072,7 @@ snapshots:
       '@microsoft/fetch-event-source': 2.0.1
       '@ownclouders/web-pkg': 12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3))
       axios: 1.11.0
-      fast-xml-parser: 5.4.1
+      fast-xml-parser: 5.5.9
       lodash-es: 4.17.21
       luxon: 3.5.0
       uuid: 11.1.0
@@ -4132,7 +4136,7 @@ snapshots:
       - typescript
       - vue
 
-  '@ownclouders/web-test-helpers@12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))':
+  '@ownclouders/web-test-helpers@12.0.3(@ownclouders/web-pkg@12.0.3(@vue/compiler-sfc@3.5.13)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(@vue/compiler-sfc@3.5.13)(@vue/test-utils@2.4.6)(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7))(vue@3.5.13(typescript@5.8.3))':
     dependencies:
       '@casl/ability': 6.8.0
       '@casl/vue': 2.2.2(@casl/ability@6.8.0)(vue@3.5.13(typescript@5.8.3))
@@ -4142,7 +4146,7 @@ snapshots:
       '@pinia/testing': 1.0.2(pinia@3.0.3(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3)))
       '@vue/test-utils': 2.4.6
       axios: 1.9.0
-      vitest-mock-extended: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7))
+      vitest-mock-extended: 3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7))
       vue: 3.5.13(typescript@5.8.3)
       vue-router: 4.5.1(vue@3.5.13(typescript@5.8.3))
       vue3-gettext: 2.4.0(@vue/compiler-sfc@3.5.13)(vue@3.5.13(typescript@5.8.3))
@@ -4850,7 +4854,7 @@ snapshots:
 
   base-64@1.0.0: {}
 
-  baseline-browser-mapping@2.10.12: {}
+  baseline-browser-mapping@2.10.13: {}
 
   binary-extensions@2.3.0: {}
 
@@ -4871,13 +4875,13 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  browserslist@4.28.1:
+  browserslist@4.28.2:
     dependencies:
-      baseline-browser-mapping: 2.10.12
-      caniuse-lite: 1.0.30001781
-      electron-to-chromium: 1.5.328
+      baseline-browser-mapping: 2.10.13
+      caniuse-lite: 1.0.30001782
+      electron-to-chromium: 1.5.329
       node-releases: 2.0.36
-      update-browserslist-db: 1.2.3(browserslist@4.28.1)
+      update-browserslist-db: 1.2.3(browserslist@4.28.2)
 
   buffer-from@1.1.2: {}
 
@@ -4899,7 +4903,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001781: {}
+  caniuse-lite@1.0.30001782: {}
 
   chai@5.2.0:
     dependencies:
@@ -5274,7 +5278,7 @@ snapshots:
       minimatch: 9.0.1
       semver: 7.7.1
 
-  electron-to-chromium@1.5.328: {}
+  electron-to-chromium@1.5.329: {}
 
   emoji-mart@5.6.0: {}
 
@@ -5526,16 +5530,19 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
-  fast-xml-builder@1.0.0: {}
+  fast-xml-builder@1.1.4:
+    dependencies:
+      path-expression-matcher: 1.2.0
 
-  fast-xml-parser@4.5.4:
+  fast-xml-parser@4.5.5:
     dependencies:
       strnum: 1.1.2
 
-  fast-xml-parser@5.4.1:
+  fast-xml-parser@5.5.9:
     dependencies:
-      fast-xml-builder: 1.0.0
-      strnum: 2.1.2
+      fast-xml-builder: 1.1.4
+      path-expression-matcher: 1.2.0
+      strnum: 2.2.2
 
   fastq@1.19.1:
     dependencies:
@@ -5687,7 +5694,7 @@ snapshots:
 
   hachure-fill@0.5.2: {}
 
-  happy-dom@20.8.8:
+  happy-dom@20.8.9:
     dependencies:
       '@types/node': 22.15.32
       '@types/whatwg-mimetype': 3.0.2
@@ -6147,6 +6154,8 @@ snapshots:
 
   path-exists@4.0.0: {}
 
+  path-expression-matcher@1.2.0: {}
+
   path-is-absolute@1.0.1: {}
 
   path-key@3.1.1: {}
@@ -6414,7 +6423,7 @@ snapshots:
 
   strnum@1.1.2: {}
 
-  strnum@2.1.2: {}
+  strnum@2.2.2: {}
 
   style-mod@4.1.2: {}
 
@@ -6531,9 +6540,9 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  update-browserslist-db@1.2.3(browserslist@4.28.1):
+  update-browserslist-db@1.2.3(browserslist@4.28.2):
     dependencies:
-      browserslist: 4.28.1
+      browserslist: 4.28.2
       escalade: 3.2.0
       picocolors: 1.1.1
 
@@ -6588,13 +6597,13 @@ snapshots:
       fsevents: 2.3.3
       sass: 1.69.7
 
-  vitest-mock-extended@3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7)):
+  vitest-mock-extended@3.1.0(typescript@5.8.3)(vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7)):
     dependencies:
       ts-essentials: 10.1.1(typescript@5.8.3)
       typescript: 5.8.3
-      vitest: 3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7)
+      vitest: 3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7)
 
-  vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.8)(sass@1.69.7):
+  vitest@3.2.4(@types/node@22.15.32)(happy-dom@20.8.9)(sass@1.69.7):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
@@ -6621,7 +6630,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.15.32
-      happy-dom: 20.8.8
+      happy-dom: 20.8.9
     transitivePeerDependencies:
       - jiti
       - less
@@ -6733,7 +6742,7 @@ snapshots:
       base-64: 1.0.0
       byte-length: 1.0.2
       entities: 5.0.0
-      fast-xml-parser: 4.5.4
+      fast-xml-parser: 4.5.5
       hot-patcher: 2.0.1
       layerr: 3.0.0
       md5: 2.3.0
