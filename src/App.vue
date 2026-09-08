@@ -58,7 +58,7 @@
       </oc-table>
       <h2 class="oc-heading-divider">WebDAV Endpoints</h2>
       <oc-table :fields="endpointTableFields" :data="endpoints" :sticky="true" :hover="true" idKey="driveAlias" class="endpoint-table">
-        <template #footer> {{ tokens.length || 0 }} endpoints </template>
+        <template #footer> {{ endpoints.length || 0 }} endpoints </template>
         <template #webUrl="rowData">
           <a class="long-link-text" :href="rowData.item.webUrl" target="_blank">{{ rowData.item.webUrl }}</a>
         </template>
