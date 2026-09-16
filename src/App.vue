@@ -14,33 +14,47 @@
       </p>
       <h2 class="oc-heading-divider">Create Token</h2>
       <form id="create-token-form" @submit.prevent="saveToken()">
-        <div class="oc-flex oc-flex-middle" style="gap: 1%;">
-          <oc-text-input
-            v-model="create_token_expiry"
-            label="Expires in"
-            type="number"
-            :error-message="create_token_error"
-            style="width: 6em"
-            class="expires-input"
-          />
-          <oc-select
-            v-model="create_token_expiry_units"
-            label="Units"
-            :options="Object.keys(expiryStringGenerator)"
-            :clearable="false"
-            :searchable="false"
-            style="width: 8em"
-            class="expires-unit-dropdown"
-          />
-	  <!-- Custom labels only supported on OCIS > 7.2.0 -->
-          <oc-text-input
-            v-model="create_token_label"
-            label="Label (Optional)"
-            style="width: 20em"
-            :class="'token-label' + (enableCustomLabels ? '' : ' oc-hidden')"
-	  />
-          <oc-button variation="primary" class="save-token-btn" submit="submit" style="margin-top: 18px"> Create </oc-button>
-	</div>
+        <div class="oc-flex oc-flex-top oc-flex-wrap oc-grid oc-grid-small">
+          <div>
+            <oc-text-input
+              v-model="create_token_expiry"
+              label="Expires in"
+              type="number"
+              :error-message="create_token_error"
+              style="width: 6em; margin-top: 6px;"
+              class="expires-input"
+            />
+          </div>
+          <div>
+            <oc-select
+              v-model="create_token_expiry_units"
+              label="Units"
+              :options="Object.keys(expiryStringGenerator)"
+              :clearable="false"
+              :searchable="false"
+              style="width: 8em; margin-top: 6px;"
+              class="expires-unit-dropdown"
+            />
+          </div>
+          <!-- Custom labels only supported on OCIS > 7.2.0 -->
+          <div :class="{ 'oc-hidden': !enableCustomLabels }">
+            <oc-text-input
+              v-model="create_token_label"
+              label="Label (Optional)"
+              style="width: 16em; margin-top: 6px;"
+              :class="['token-label', { 'oc-hidden': !enableCustomLabels }]"
+            />
+          </div>
+          <div>
+            <oc-button 
+              variation="primary" 
+              class="save-token-btn" 
+              submit="submit"
+              style="margin-top: 30px;"
+              > Create 
+            </oc-button>
+          </div>
+        </div>
       </form>
       <h2 class="oc-heading-divider">Existing Tokens</h2>
       <oc-table :fields="tokenTableFields" :data="tokens" :sticky="true" :hover="true" idKey="token" class="token-table">
@@ -310,7 +324,7 @@ export default {
     saveToken: function () {
       // Basic validation
       if (isNaN(this.create_token_expiry) || this.create_token_expiry <= 0) {
-        this.create_token_error = "'Expires in' must be a number greater than 0"
+        this.create_token_error = "'Expires in' must be greater than 0"
         return
       }
 
